@@ -1,0 +1,7 @@
+**/.exercism/
+
+
+# in all of the exercism git ignores
+**/target
+**/target/
+**/Cargo.lock
