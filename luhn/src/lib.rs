@@ -7,17 +7,20 @@ pub fn is_valid(code: &str) -> bool {
 
     const RADIX: u32 = 10;
 
-    let dig = ' ';
-    let my_bool = dig.is_ascii_digit();
-    todo!("dig {dig} {my_bool}");
-
     let mut digits = Vec::new();
     let mut digits2 = Vec::new();
     // loop over each digit (reversed / right to left)
     code.chars()
         .rev()
         .filter(|c| c.is_ascii_digit())
-        .map(|c_dig| digits.push(c_dig.to_digit(RADIX).unwrap() as i32));
+        .into_iter()
+        .for_each(|c_dig| digits.push(c_dig.to_digit(RADIX).unwrap() as i32));
+
+    println!("inspect digits - {code} - {:?}", digits);
+
+    if digits.len() < 2 {
+        return false;
+    }
 
     // double every second digit, and if it's greater than 9 then subtract 9
     for (index, n) in digits.iter().enumerate() {
@@ -35,7 +38,7 @@ pub fn is_valid(code: &str) -> bool {
         .reduce(|a, b| a + b)
         .unwrap();
 
-    todo!("what's teh sum {sum}");
+    println!("what's the sum {sum}");
 
     return sum % 10 == 0;
 }
