@@ -1,7 +1,7 @@
 /// Check a Luhn checksum.
 pub fn is_valid(code: &str) -> bool {
     // luhn codes that are of length 1 or less are invalid
-    if code.len() < 2 {
+    if code.chars().filter(|c| c.is_ascii_digit()).count() < 2 {
         return false;
     }
 
@@ -10,7 +10,6 @@ pub fn is_valid(code: &str) -> bool {
     let mut i: i32 = (code.len() - 1) as i32;
     let mut sum: i32 = 0;
     let mut odd: bool = false;
-    let mut num_digits = 0;
 
     while i >= 0 {
         let idx: usize = i as usize;
@@ -31,24 +30,10 @@ pub fn is_valid(code: &str) -> bool {
             sum += num as i32;
         }
 
-        num_digits += 1;
         i -= 1;
         odd = !odd;
     }
 
-    num_digits > 2 && sum % 10 == 0
+    sum % 10 == 0
 }
 
-
-
-
-
-
-// add to settings.json to not edit rust libraries :)
-// 
-// "files.readonlyInclude": {
-//   "**/.cargo/registry/src/**/*.rs": true,
-//   "**/.cargo/git/checkouts/**/*.rs": true,
-//   "**/lib/rustlib/src/rust/library/**/*.rs": true,
-// },
-//
