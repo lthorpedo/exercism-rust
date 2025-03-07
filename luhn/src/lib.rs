@@ -5,47 +5,42 @@ pub fn is_valid(code: &str) -> bool {
         return false;
     }
 
-    let contains_letters = code.chars()
-        .any(|c| c.is_ascii_alphabetic());
-    let contains_symbols = code.chars()
-        .any(|c| c.is_ascii_punctuation());
-    
-    if contains_letters || contains_symbols {
-        return false;
-    }
-
     const RADIX: u32 = 10;
+    let nums: &[u8] = code.as_bytes();
+    let mut i: i32 = (code.len() - 1) as i32;
+    let mut sum: i32 = 0;
+    let mut odd: bool = false;
+    let mut num_digits = 0;
 
-    let mut digits = Vec::new();
-    let mut digits2 = Vec::new();
-    // loop over each digit (reversed / right to left)
-    code.chars()
-        .rev()
-        .filter(|c| c.is_ascii_digit())
-        .into_iter()
-        .for_each(|c_dig| digits.push(c_dig.to_digit(RADIX).unwrap() as i32));
+    while i >= 0 {
+        let idx: usize = i as usize;
+        if nums[idx] == b' ' {
+            i -= 1;
+            continue;
+        }
 
-    if digits.len() < 2 {
+        let num: u32 = match (nums[idx] as char).to_digit(RADIX) {
+            Some(n) => n,
+            None => return false,
+        };
+
+        if odd {
+            let add: u32 = if num < 5 { num * 2 } else { num * 2 - 9 };
+            sum += add as i32;
+        } else {
+            sum += num as i32;
+        }
+
+        num_digits += 1;
+        i -= 1;
+        odd = !odd;
+    }
+
+    if num_digits < 2 {
         return false;
     }
-
-    // double every second digit, and if it's greater than 9 then subtract 9
-    for (index, n) in digits.iter().enumerate() {
-        let mut temp = *n;
-        if index % 2 == 1 {
-            temp = n * 2;
-            if temp > 9 {
-                temp = temp - 9;
-            }
-        }
-        digits2.push(temp);
-    }
-
-    let sum = digits2.into_iter()
-        .reduce(|a, b| a + b)
-        .unwrap();
-
-    return sum % 10 == 0;
+    
+    sum % 10 == 0
 }
 
 
