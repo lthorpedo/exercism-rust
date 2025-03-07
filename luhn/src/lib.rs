@@ -36,11 +36,7 @@ pub fn is_valid(code: &str) -> bool {
         odd = !odd;
     }
 
-    if num_digits < 2 {
-        return false;
-    }
-    
-    sum % 10 == 0
+    num_digits > 2 && sum % 10 == 0
 }
 
 
