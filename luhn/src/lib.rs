@@ -5,6 +5,15 @@ pub fn is_valid(code: &str) -> bool {
         return false;
     }
 
+    let contains_letters = code.chars()
+        .any(|c| c.is_ascii_alphabetic());
+    let contains_symbols = code.chars()
+        .any(|c| c.is_ascii_punctuation());
+    
+    if contains_letters || contains_symbols {
+        return false;
+    }
+
     const RADIX: u32 = 10;
 
     let mut digits = Vec::new();
@@ -15,8 +24,6 @@ pub fn is_valid(code: &str) -> bool {
         .filter(|c| c.is_ascii_digit())
         .into_iter()
         .for_each(|c_dig| digits.push(c_dig.to_digit(RADIX).unwrap() as i32));
-
-    println!("inspect digits - {code} - {:?}", digits);
 
     if digits.len() < 2 {
         return false;
@@ -37,8 +44,6 @@ pub fn is_valid(code: &str) -> bool {
     let sum = digits2.into_iter()
         .reduce(|a, b| a + b)
         .unwrap();
-
-    println!("what's the sum {sum}");
 
     return sum % 10 == 0;
 }
