@@ -15,7 +15,7 @@ pub fn reply(message: &str) -> &str {
 
     let q_mark = msg_no_spaces.ends_with("?");
 
-    let silence = msg_no_spaces == "";
+    let silence = msg_no_spaces.is_empty();
 
     if all_caps && q_mark {
         return "Calm down, I know what I'm doing!";
