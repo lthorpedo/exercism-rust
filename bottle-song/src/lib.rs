@@ -12,8 +12,7 @@ pub fn recite(start_bottles: u32, take_down: u32) -> String {
 
     while bottles > 0 && iterations > 0 {
         let bottles_str = if bottles == 1 {"bottle"} else {"bottles"};
-        let num_str = int_to_str(bottles);
-        let up_num_str = uppercase_first_letter(&num_str);
+        let num_str = uppercase_first_letter(&int_to_str(bottles));
     
         bottles -= 1;
         iterations -= 1;
@@ -21,8 +20,8 @@ pub fn recite(start_bottles: u32, take_down: u32) -> String {
         let bottles_left_str = if bottles == 1 {"bottle"} else {"bottles"};
         let num_bottles_left_str = int_to_str(bottles);
     
-        let verse = format!("\n\n{up_num_str} green {bottles_str} hanging on the wall,\n\
-                {up_num_str} green {bottles_str} hanging on the wall,\n\
+        let verse = format!("\n\n{num_str} green {bottles_str} hanging on the wall,\n\
+                {num_str} green {bottles_str} hanging on the wall,\n\
                 And if one green bottle should accidentally fall,\n\
                 There'll be {num_bottles_left_str} green {bottles_left_str} hanging on the wall.");
         
@@ -34,17 +33,17 @@ pub fn recite(start_bottles: u32, take_down: u32) -> String {
 
 fn int_to_str(x: i32) -> String {
     match x {
-        10 => return String::from("ten"),
-        9 => return String::from("nine"),
-        8 => return String::from("eight"),
-        7 => return String::from("seven"),
-        6 => return String::from("six"),
-        5 => return String::from("five"),
-        4 => return String::from("four"),
-        3 => return String::from("three"),
-        2 => return String::from("two"),
-        1 => return String::from("one"),
-        _ => return String::from("no")
+        10 => String::from("ten"),
+        9 => String::from("nine"),
+        8 => String::from("eight"),
+        7 => String::from("seven"),
+        6 => String::from("six"),
+        5 => String::from("five"),
+        4 => String::from("four"),
+        3 => String::from("three"),
+        2 => String::from("two"),
+        1 => String::from("one"),
+        _ => String::from("no")
     }
 }
 
