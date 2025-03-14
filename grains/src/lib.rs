@@ -1,14 +1,11 @@
 pub fn square(s: u32) -> u64 {
-    if s < 1 || s > 64 {
-        panic!("this is more or less squares than we have on a chessboard");
+    match s {
+        1..=64 => 2_u64.pow(s-1),
+        _ => panic!("Gotta check your chessboard. Must be between 1 & 64")
     }
-
-    let two: u64 = 2;
-    two.pow(s - 1)
 }
 
 pub fn total() -> u64 {
-    (1..65)
-        .reduce(|acc: u64, num: u64| acc + square(num as u32))
-        .unwrap()
+    (1..=64)
+        .fold(0,|acc: u64, num: u32| acc + square(num))
 }
