@@ -1,7 +1,7 @@
 pub fn abbreviate(phrase: &str) -> String {
     phrase.split(|c: char| c.is_whitespace() || c == '-')
         .filter(|s| s.chars().filter(|c| c.is_alphabetic()).count() > 0)
-        .map(|word| acronym_from_word(word))
+        .map(acronym_from_word)
         .collect::<Vec<String>>()
         .join("")
 }
