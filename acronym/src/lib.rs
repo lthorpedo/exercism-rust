@@ -1,11 +1,5 @@
-use regex::Regex;
-
 pub fn abbreviate(phrase: &str) -> String {
-    // split up words with capital letters in the middle
-
-    // split up into words based on hyphens and any whitespace
-    let splitter = Regex::new(r"([-\s]+)").unwrap();
-    splitter.split(phrase)
+    phrase.split_whitespace()
         .filter(|s| s.chars().filter(|c| c.is_alphabetic()).count() > 0)
         .map(|word| acronym_from_word(word))
         .collect::<Vec<String>>()
