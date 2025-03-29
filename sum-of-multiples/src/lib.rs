@@ -6,7 +6,7 @@ pub fn sum_of_multiples(limit: u32, factors: &[u32]) -> u32 {
     for i in factors.iter().filter(|x| **x != 0) {
         let mut idx = 1_u32;
         while idx < limit {
-            if idx % i == 0 && !integers.contains(&idx) {
+            if idx % i == 0 {
                 integers.insert(idx);
             }
             idx += 1;
