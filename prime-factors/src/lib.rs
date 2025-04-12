@@ -1,5 +1,5 @@
 pub fn factors(n: u64) -> Vec<u64> {
-    let mut ret= Vec::new();
+    let mut ret = Vec::new();
     let mut num = n;
     let mut temp = 2_u64;
 
