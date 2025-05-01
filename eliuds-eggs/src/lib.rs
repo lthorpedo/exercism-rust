@@ -1,7 +1,7 @@
 pub fn egg_count(display_value: u32) -> usize {
     let mut eggs = 0;
     let mut num = display_value;
-    let mut power: u32 = 31;
+    let mut power: u32 = 32;
     let base: u32 = 2;
 
     while num > 0 {

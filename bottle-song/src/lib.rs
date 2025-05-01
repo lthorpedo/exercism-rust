@@ -54,3 +54,4 @@ fn uppercase_first_letter(s: &str) -> String {
         Some(f) => f.to_uppercase().chain(c).collect(),
     }
 }
+
