@@ -25,8 +25,6 @@ pub fn convert(number: &[u32], from_base: u32, to_base: u32) -> Result<Vec<u32>,
         base_10 += digit;
     }
 
-    println!("base 10 _ {base_10}");
-
     if base_10 == 0 {
         return Ok(vec![0]);
     }
