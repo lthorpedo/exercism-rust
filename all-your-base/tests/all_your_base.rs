@@ -49,7 +49,6 @@ fn binary_to_multiple_decimal() {
 }
 
 #[test]
-#[ignore]
 fn decimal_to_binary() {
     let input_base = 10;
     let input_digits = &[4, 2];
@@ -62,7 +61,6 @@ fn decimal_to_binary() {
 }
 
 #[test]
-#[ignore]
 fn trinary_to_hexadecimal() {
     let input_base = 3;
     let input_digits = &[1, 1, 2, 0];
@@ -75,7 +73,6 @@ fn trinary_to_hexadecimal() {
 }
 
 #[test]
-#[ignore]
 fn hexadecimal_to_trinary() {
     let input_base = 16;
     let input_digits = &[2, 10];
@@ -88,7 +85,6 @@ fn hexadecimal_to_trinary() {
 }
 
 #[test]
-#[ignore]
 fn test_15_bit_integer() {
     let input_base = 97;
     let input_digits = &[3, 46, 60];
@@ -125,7 +121,6 @@ fn single_zero() {
 }
 
 #[test]
-#[ignore]
 fn multiple_zeros() {
     let input_base = 10;
     let input_digits = &[0, 0, 0];
@@ -138,7 +133,6 @@ fn multiple_zeros() {
 }
 
 #[test]
-#[ignore]
 fn leading_zeros() {
     let input_base = 7;
     let input_digits = &[0, 6, 0];

@@ -36,8 +36,55 @@ pub fn convert(number: &[u32], from_base: u32, to_base: u32) -> Result<Vec<u32>,
     }
 
     println!("base10: {0}", base_10);
+    println!("from_base: {0}. to_base: {1}.", from_base, to_base);
 
-    return Err(Error::InvalidDigit(1));
+    if base_10 == 0 {
+        return Ok(vec![0]);
+    }
+
+    let mut power = 0;
+    let mut x = to_base.pow(power);
+
+    while x <= base_10 {
+        power += 1;
+        x = to_base.pow(power);
+    }
+
+    println!("power: {0}", power);
+
+    let mut sliding = base_10;
+    let mut vec = Vec::new();
+
+    while power > 0 {
+        power -= 1;
+        let mut digit = 0;
+        let mut subtraction = 0;
+        while digit < to_base {
+            digit += 1;
+            let test = digit * to_base.pow(power);
+
+            if test > sliding {
+                digit -= 1;
+                break;
+            }
+
+            subtraction = test;
+
+            if test == sliding {
+                break;
+            }
+        }
+
+        if subtraction > 0 {
+            vec.push(digit);
+            sliding -= subtraction;
+        }
+        else {
+            vec.push(0);
+        }
+    }
+
+    return Ok(vec);
 }
 
 /*
