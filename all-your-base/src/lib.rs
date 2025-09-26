@@ -14,26 +14,18 @@ pub fn convert(number: &[u32], from_base: u32, to_base: u32) -> Result<Vec<u32>,
         return Err(Error::InvalidOutputBase);
     }
 
-    if number.is_empty() {
-        return Ok(vec![0]);
-    }
-
-    let mut i = i32::try_from(number.len() - 1).unwrap();
     let mut base_10 = 0;
-    let mut idx: usize = 0;
 
-    while i >= 0 {
-        let num = number[idx];
-        if num != 0 {
-            if num >= from_base {
-                return Err(Error::InvalidDigit(num));
-            }
-            let n_u32 = u32::try_from(i).unwrap();
-            base_10 += num * from_base.pow(n_u32);
+    for digit in number {
+        if *digit >= from_base {
+            return Err(Error::InvalidDigit(*digit));
         }
-        i -= 1;
-        idx += 1;
+
+        base_10 *= from_base;
+        base_10 += digit;
     }
+
+    println!("base 10 _ {base_10}");
 
     if base_10 == 0 {
         return Ok(vec![0]);
